@@ -7,8 +7,12 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 // Swagger middleware
-app.UseSwagger();
-app.UseSwaggerUI();
+if (!app.Environment.IsEnvironment("Testing"))
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
 
 // HTTPS (opcional en Docker)
 app.UseHttpsRedirection();
